@@ -1,11 +1,13 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
+const path = require('path');
 
 const app = express();
 const port = 5500;
 
-//Handlebars config
+app.use(express.static(path.resolve(__dirname, './src/public')));  // Configure static files folder
 
+//Handlebars config
 app.engine('hbs', handlebars.engine({
     extname: 'hbs'
 }));
