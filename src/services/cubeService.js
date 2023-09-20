@@ -32,15 +32,15 @@ exports.getAll = (search, from, to) => {
     let result = cubes.slice();
 
     if (search) {
-        result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
+        result = result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
     }
 
     if (from) {
-        result.filter(cube => cube.difficultyLevel >= Number(from));
+        result = result.filter(cube => cube.difficultyLevel >= Number(from));
     }
 
     if (to) {
-        result.filter(cube => cube.difficultyLevel <= Number(to));
+        result = result.filter(cube => cube.difficultyLevel <= Number(to));
     }
 
     return result;
