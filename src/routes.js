@@ -4,7 +4,7 @@ const cubeController = require('./controllers/cubeController.js');
 
 router.use(homeController);   // This controller will work all the time.
 router.use('/cubes', cubeController); // This controller will work only when we have req to /cubes/
-router.get('*', (req, res) => {
+router.get('*', (req, res) => {  //Redirect everything else to page 404
     res.redirect('/404')
 });
 

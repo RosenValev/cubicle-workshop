@@ -13,7 +13,16 @@ const cubes = [
         description: 'Evergreen',
         imageUrl: 'https://www.hpcwire.com/wp-content/uploads/2018/07/Rubiks_Cube_shutterstock_271810067-675x380.jpg',
         difficultyLevel: 3
+    },
+    {
+        id: '2n733h8horazs6elc',
+        name: 'Dbrand cube',
+        description: 'Something different',
+        imageUrl: 'https://dbrand.com/sites/default/files/dba/skin-customizer/dbrand-cube/WhJtnfiS98zTG7gr.jpg',
+        difficultyLevel: 5
     }
+
+
 ];
 
 exports.create = (cubeData) => {
