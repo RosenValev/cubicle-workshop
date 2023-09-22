@@ -15,7 +15,6 @@ dbConnect()
     .then(() => console.log('DB connected successfully'))
     .catch(err => console.log('DB error :', err));
 
-
 app.use(routes)
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));

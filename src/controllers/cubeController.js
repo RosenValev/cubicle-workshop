@@ -5,7 +5,7 @@ router.get('/create', (req, res) => {     // Path ...../cubes/create, because of
     res.render('create');
 })
 
-router.post('/create', (req, res) => {
+router.post('/create', async (req, res) => {
     const {
         name,
         description,
@@ -13,7 +13,7 @@ router.post('/create', (req, res) => {
         difficultyLevel,
     } = req.body;
 
-    cubeService.create({
+    await cubeService.create({
         name,
         description,
         imageUrl,
@@ -23,8 +23,8 @@ router.post('/create', (req, res) => {
     res.redirect('/')
 });
 
-router.get('/:cubeId/details', (req, res) => {
-    const cube = cubeService.getOne(req.params.cubeId);
+router.get('/:cubeId/details', async (req, res) => {
+    const cube = await cubeService.getOne(req.params.cubeId).lean();  // Using .lean() to transform the document from mangoose to object so handlebars could work
 
     if (!cube) {
         return res.redirect('/404');

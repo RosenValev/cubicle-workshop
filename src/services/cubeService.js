@@ -1,44 +1,18 @@
 const uniqId = require('uniqid');
-const cubes = [
-    {
-        id: '1n73sh8holhz66elc',
-        name: 'Mirror Cube',
-        description: 'A cool mirror cube',
-        imageUrl: 'https://m.media-amazon.com/images/I/71TrvUl50OL.jpg',
-        difficultyLevel: 4
-    },
-    {
-        id: '2n73sh8holaz66elc',
-        name: 'Rubic Classic',
-        description: 'Evergreen',
-        imageUrl: 'https://www.hpcwire.com/wp-content/uploads/2018/07/Rubiks_Cube_shutterstock_271810067-675x380.jpg',
-        difficultyLevel: 3
-    },
-    {
-        id: '2n733h8horazs6elc',
-        name: 'Dbrand cube',
-        description: 'Something different',
-        imageUrl: 'https://dbrand.com/sites/default/files/dba/skin-customizer/dbrand-cube/WhJtnfiS98zTG7gr.jpg',
-        difficultyLevel: 5
-    }
+const Cube = require('../models/Cube.js');
 
+exports.create = async (cubeData) => {
+    const newCube = new Cube(cubeData);
 
-];
+    await newCube.save();
 
-exports.create = (cubeData) => {
-    const newCube = {
-        id: uniqId(),
-        ...cubeData,
-    };
-
-    cubes.push(newCube);
     return newCube;
 }
 
-exports.getOne = (cubeId) => cubes.find(x => x.id == cubeId);
+exports.getOne = (cubeId) => Cube.findById(cubeId);
 
-exports.getAll = (search, from, to) => {
-    let result = cubes.slice();
+exports.getAll = async (search, from, to) => {
+    let result = await Cube.find().lean();
 
     if (search) {
         result = result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
