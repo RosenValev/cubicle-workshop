@@ -25,7 +25,7 @@ router.post('/create', async (req, res) => {
 });
 
 router.get('/:cubeId/details', async (req, res) => {
-    const cube = await cubeService.getOne(req.params.cubeId).lean();  // Using .lean() to transform the document from mangoose to object so handlebars could work
+    const cube = await cubeService.getOneWithAccessories(req.params.cubeId).lean();  // Using .lean() to transform the document from mangoose to object so handlebars could work
 
     if (!cube) {
         return res.redirect('/404');

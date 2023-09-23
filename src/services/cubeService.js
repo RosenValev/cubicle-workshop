@@ -10,6 +10,8 @@ exports.create = async (cubeData) => {
 
 exports.getOne = (cubeId) => Cube.findById(cubeId);
 
+exports.getOneWithAccessories = (cubeId) => this.getOne(cubeId).populate('accessories');
+
 exports.getAll = async (search, from, to) => {
     let result = await Cube.find().lean();
 
