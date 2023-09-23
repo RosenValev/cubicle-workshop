@@ -1,4 +1,3 @@
-const uniqId = require('uniqid');
 const Cube = require('../models/Cube.js');
 
 exports.create = async (cubeData) => {

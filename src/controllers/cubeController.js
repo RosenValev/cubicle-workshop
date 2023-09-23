@@ -20,7 +20,7 @@ router.post('/create', async (req, res) => {
         difficultyLevel: Number(difficultyLevel),
     });
 
-    res.redirect('/')
+    res.redirect('/');
 });
 
 router.get('/:cubeId/details', async (req, res) => {
