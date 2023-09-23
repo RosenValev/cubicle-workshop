@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const cubeService = require('../services/cubeService.js');
+const accessoryService = require('../services/accessoryService.js');
 
 router.get('/create', (req, res) => {     // Path ...../cubes/create, because of the modular routes.
     res.render('create');
@@ -34,8 +35,10 @@ router.get('/:cubeId/details', async (req, res) => {
 });
 
 
-router.get('/:cubeId/attach-accessory', (req, res) => {
-    res.render('accessory/attach');
+router.get('/:cubeId/attach-accessory', async (req, res) => {
+    const cube = await cubeService.getOne(req.params.cubeId).lean();
+    const accessories = await accessoryService.getAll().lean();
+    res.render('accessory/attach', { cube, accessories });
 });
 
 

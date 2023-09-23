@@ -7,7 +7,7 @@ router.get('/create', (req, res) => {
 
 router.post('/create', async (req, res) => {
     const { name, description, imageUrl } = req.body
-    console.log({ name, description, imageUrl })
+    // console.log({ name, description, imageUrl })
 
     await accessoryService.create({ name, description, imageUrl });
 
