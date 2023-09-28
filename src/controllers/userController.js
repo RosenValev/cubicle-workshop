@@ -11,7 +11,18 @@ router.post('/register', async (req, res) => {
 
     await userService.register({ username, password, repeatPassword });
 
-    res.redirect('users/login');
+    res.redirect('/users/login');
 });
+
+router.get('/login', (req, res) => {
+    res.render('users/login');
+});
+
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    await userService.login(username, password);
+    res.redirect('/');
+})
+
 
 module.exports = router;
