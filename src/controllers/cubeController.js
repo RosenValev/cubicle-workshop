@@ -3,6 +3,7 @@ const cubeService = require('../services/cubeService.js');
 const accessoryService = require('../services/accessoryService.js');
 
 router.get('/create', (req, res) => {     // Path ...../cubes/create, because of the modular routes.
+    console.log(req.user)
     res.render('create');
 })
 
