@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const cubeService = require('../services/cubeService.js');
 const accessoryService = require('../services/accessoryService.js');
+const { getDifficultyOptionsViewData } = require('../utils/viewHelpers.js');
 
 router.get('/create', (req, res) => {     // Path ...../cubes/create, because of the modular routes.
     console.log(req.user)
@@ -65,24 +66,6 @@ router.post('/:cubeId/delete', async (req, res) => {
     res.redirect('/');
 });
 
-function getDifficultyOptionsViewData(difficultyLevel) {
-    const titles = [
-        'Very Easy',
-        'Easy',
-        'Medium(Standard 3x3)',
-        'Intermediate',
-        'Expert',
-        'Hardcore'
-    ];
-
-    const options = titles.map((title, index) => ({
-        title: `${index + 1} - ${title}`,
-        value: index + 1,
-        selected: Number(difficultyLevel) === index + 1,
-    }));
-
-    return options;
-}
 
 router.get('/:cubeId/edit', async (req, res) => {
     const cube = await cubeService.getOne(req.params.cubeId).lean();
