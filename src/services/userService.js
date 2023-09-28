@@ -1,6 +1,9 @@
 const { Error } = require('mongoose');
 const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
+const jwtPromises = require('../lib/jwt.js')
+
+const SECRET = "alabala"
 
 exports.register = (userData) => User.create(userData);
 
@@ -16,5 +19,12 @@ exports.login = async (username, password) => {
         throw new Error('Cannot find username or password');
     }
 
-    return user;
+    const payload = {
+        _id: user._id,
+        username: user.username,
+    }
+
+    const token = jwtPromises.sign(payload, SECRET, { expiresIn: '2d'});
+
+    return token;
 }
