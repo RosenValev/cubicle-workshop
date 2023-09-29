@@ -56,8 +56,9 @@ router.post('/:cubeId/attach-accessory', async (req, res) => {
 
 router.get('/:cubeId/delete', async (req, res) => {
     const cube = await cubeService.getOne(req.params.cubeId).lean();
+    const options = getDifficultyOptionsViewData(cube.difficultyLevel);
 
-    res.render('cube/delete', { cube })
+    res.render('cube/delete', { cube, options })
 })
 
 router.post('/:cubeId/delete', async (req, res) => {
