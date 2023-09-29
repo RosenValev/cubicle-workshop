@@ -6,8 +6,11 @@ exports.auth = async (req, res, next) => {
 
     if (token) {
         try {
-            const user = await jwtPromises.verify(token, SECRET);
-            req.user = user // Adding information for the user for all actions afterwards.
+            const decodedToken = await jwtPromises.verify(token, SECRET);
+            req.user = decodedToken // Adding information for the user for all actions afterwards.
+
+            res.locals.user = decodedToken;
+            res.locals.isLogged = true;
             next();
         } catch (err) {
             res.clearCookie('auth');
