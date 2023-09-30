@@ -5,22 +5,22 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: [true, 'Username is required'],
-        minLength: [5, 'At least 5 characters'],
+        minLength: [5, 'Username must be at least 5 characters'],
         match: [/^[A-Za-z0-9]+$/, 'Username must be alphanumeric'],
         unique: true,
     },
     password: {
         type: String,
-        required: true,
+        required: [true, 'Password is required'],
         match: [/^[A-Za-z0-9]+$/, 'Invalid password characters'],
-        minLength: 8,
+        minLength: [8, 'Password must be at least 8 characters'],
     }
 });
 
 userSchema.virtual('repeatPassword')
     .set(function (value) {
         if (value !== this.password) {
-            throw new mongoose.MongooseError('Password don`t match');
+            throw new Error('Password don`t match');
         }
     });
 
